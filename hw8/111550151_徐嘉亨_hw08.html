@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        數據科學概論 HW8 - HackMD
+    </title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+    <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i|Source+Code+Pro:300,400,500|Source+Sans+Pro:300,300i,400,400i,600,600i|Source+Serif+Pro&subset=latin-ext);.hljs{background:#fff;color:#333;display:block;overflow-x:auto;padding:.5em}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-string,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-number,.hljs-symbol{color:#0086b3}.hljs-built_in,.hljs-builtin-name{color:#005cc5}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#795da3}.hljs-addition{background-color:#eaffea;color:#55a532}.hljs-deletion{background-color:#ffecec;color:#bd2c00}.hljs-link{text-decoration:underline}.markdown-body{word-wrap:break-word;font-size:16px;line-height:1.5}.markdown-body:after,.markdown-body:before{content:"";display:table}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;line-height:1;margin-left:-20px;padding-right:4px}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-bottom:16px;margin-top:0}.markdown-body hr{background-color:#e7e7e7;border:0;height:.25em;margin:24px 0;padding:0}.markdown-body blockquote{border-left:.25em solid #ddd;color:#777;font-size:16px;padding:0 1em}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body kbd,.popover kbd{background-color:#fcfcfc;border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb;color:#555;display:inline-block;font-size:11px;line-height:10px;padding:3px 5px;vertical-align:middle}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{font-weight:600;line-height:1.25;margin-bottom:16px;margin-top:24px}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#000;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{border-bottom:1px solid #eee;padding-bottom:.3em}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{color:#777;font-size:.85em}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{list-style-type:none;padding:0}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-bottom:0;margin-top:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{padding-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{font-size:1em;font-style:italic;font-weight:700;margin-top:16px;padding:0}.markdown-body dl dd{margin-bottom:16px;padding:0 16px}.markdown-body table{display:block;overflow:auto;width:100%;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{border:1px solid #ddd;padding:6px 13px}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{background-color:#fff;box-sizing:initial;max-width:100%}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{background-color:initial;max-width:none;vertical-align:text-top}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{border:1px solid #ddd;display:block;float:left;margin:13px 0 0;overflow:hidden;padding:7px;width:auto}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{clear:both;color:#333;display:block;padding:5px 0 0}.markdown-body span.align-center{clear:both;display:block;overflow:hidden}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{clear:both;display:block;overflow:hidden}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{background-color:#0000000a;border-radius:3px;font-size:85%;margin:0;padding:.2em 0}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{content:"\00a0";letter-spacing:-.2em}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{background:#0000;border:0;font-size:100%;margin:0;padding:0;white-space:pre;word-break:normal}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{border-radius:3px;font-size:85%;line-height:1.45;overflow:auto}.markdown-body:not(.next-editor) pre{background-color:#f7f7f7;padding:16px}.markdown-body pre code,.markdown-body pre tt{word-wrap:normal;background-color:initial;border:0;display:inline;line-height:inherit;margin:0;max-width:auto;overflow:visible;padding:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{font-size:12px;line-height:1;overflow:hidden;padding:5px;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{background:#fff;border:0;padding:10px 8px 9px;text-align:right}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{background:#f8f8f8;border-top:0;font-weight:700}.news .alert .markdown-body blockquote{border:0;padding:0 0 0 40px}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{cursor:default!important;float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle}.markdown-body{max-width:758px;overflow:visible!important;padding-bottom:40px;padding-top:40px;position:relative}.markdown-body.next-editor{overflow-x:hidden!important}.markdown-body .emoji{vertical-align:top}.markdown-body pre{border:inherit!important}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{border-right:3px solid #6ce26c!important;box-sizing:initial;color:#afafaf!important;cursor:default;display:inline-block;min-width:20px;padding:0 8px 0 0;position:relative;text-align:right;z-index:4}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-bottom:none;border-left:none;border-top:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-collapse:inherit!important;border-spacing:0}.markdown-body code[data-gist-id]{background:none;padding:0}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{margin-bottom:unset;overflow:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert{display:flex;flex-direction:column;gap:16px}.markdown-body .alert>*{margin:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{background-color:inherit;border-radius:0;overflow:visible;text-align:center;white-space:inherit}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{height:100%;max-width:100%}.markdown-body pre>code.wrap{word-wrap:break-word;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body .mark,.markdown-body mark{background-color:#fff1a7}.vimeo,.youtube{background-color:#000;background-position:50%;background-repeat:no-repeat;background-size:contain;cursor:pointer;display:table;overflow:hidden;text-align:center}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{object-fit:contain;width:100%;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{height:100%;left:0;position:absolute;top:0;width:100%}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{color:#fff;height:auto;left:50%;opacity:.3;position:absolute;top:50%;transform:translate(-50%,-50%);transition:opacity .2s;width:auto;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{bottom:0;height:100%;left:0;position:absolute;right:0;top:0;width:100%}.figma{display:table;padding-bottom:56.25%;position:relative;width:100%}.figma iframe{border:1px solid #eee;bottom:0;height:100%;left:0;position:absolute;right:0;top:0;width:100%}.markmap-container{height:300px}.markmap-container>svg{height:100%;width:100%}.MJX_Assistive_MathML{display:none}#MathJax_Message{z-index:1000!important}.ui-infobar{color:#777;margin:25px auto -25px;max-width:760px;position:relative;z-index:2}.toc .invisable-node{list-style-type:none}.ui-toc{bottom:20px;position:fixed;z-index:998}.ui-toc.both-mode{margin-left:8px}.ui-toc.both-mode .ui-toc-label{border-bottom-left-radius:0;border-top-left-radius:0;height:40px;padding:10px 4px}.ui-toc-label{background-color:#e6e6e6;border:none;color:#868686;transition:opacity .2s}.ui-toc .open .ui-toc-label{color:#fff;opacity:1;transition:opacity .2s}.ui-toc-label:focus{background-color:#ccc;color:#000;opacity:.3}.ui-toc-label:hover{background-color:#ccc;opacity:1;transition:opacity .2s}.ui-toc-dropdown{margin-bottom:20px;margin-top:20px;max-height:70vh;max-width:45vw;overflow:auto;padding-left:10px;padding-right:10px;text-align:inherit;width:25vw}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{letter-spacing:.0029em;padding-right:0}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{color:#767676;display:block;font-size:13px;font-weight:500;padding:4px 20px}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{background-color:initial;border-left:1px solid #000;color:#000;padding-left:19px;text-decoration:none}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{border-left:none;border-right:1px solid #000;padding-right:19px}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{background-color:initial;border-left:2px solid #000;color:#000;font-weight:700;padding-left:18px}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{border-left:none;border-right:2px solid #000;padding-right:18px}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{font-size:12px;font-weight:400;padding-bottom:1px;padding-left:30px;padding-top:1px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{font-size:12px;font-weight:400;padding-bottom:1px;padding-left:40px;padding-top:1px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{font-weight:500;padding-left:28px}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{font-weight:500;padding-left:38px}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang^=ja] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang=zh-tw] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang=zh-cn] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html .markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html .markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html .markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang^=ja] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ Ｐゴシック,sans-serif}html[lang=zh-tw] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html[lang=zh-cn] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}html .ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ Ｐゴシック,sans-serif}html .ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html .ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}.ui-affix-toc{max-height:70vh;max-width:15vw;overflow:auto;position:fixed;top:0}.back-to-top,.expand-toggle,.go-to-bottom{color:#999;display:block;font-size:12px;font-weight:500;margin-left:10px;margin-top:10px;padding:4px 10px}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{background-position:50%;background-repeat:no-repeat;background-size:cover;border-radius:50%;display:block;height:20px;margin-bottom:2px;margin-right:5px;margin-top:2px;width:20px}.ui-user-icon.small{display:inline-block;height:18px;margin:0 0 .2em;vertical-align:middle;width:18px}.ui-infobar>small>span{line-height:22px}.ui-infobar>small .dropdown{display:inline-block}.ui-infobar>small .dropdown a:focus,.ui-infobar>small .dropdown a:hover{text-decoration:none}.ui-more-info{color:#888;cursor:pointer;vertical-align:middle}.ui-more-info .fa{font-size:16px}.ui-connectedGithub,.ui-published-note{color:#888}.ui-connectedGithub{line-height:23px;white-space:nowrap}.ui-connectedGithub a.file-path{color:#888;padding-left:22px;text-decoration:none}.ui-connectedGithub a.file-path:active,.ui-connectedGithub a.file-path:hover{color:#888;text-decoration:underline}.ui-connectedGithub .fa{font-size:20px}.ui-published-note .fa{font-size:20px;vertical-align:top}.unselectable{-webkit-user-select:none;-o-user-select:none;user-select:none}.selectable{-webkit-user-select:text;-o-user-select:text;user-select:text}.inline-spoiler-section{cursor:pointer}.inline-spoiler-section .spoiler-text{background-color:#333;border-radius:2px}.inline-spoiler-section .spoiler-text>*{opacity:0}.inline-spoiler-section .spoiler-img{filter:blur(10px)}.inline-spoiler-section.raw{background-color:#333;border-radius:2px}.inline-spoiler-section.raw>*{opacity:0}.inline-spoiler-section.unveil{cursor:auto}.inline-spoiler-section.unveil .spoiler-text{background-color:#3333331a}.inline-spoiler-section.unveil .spoiler-text>*{opacity:1}.inline-spoiler-section.unveil .spoiler-img{filter:none}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{color:#222;position:relative;z-index:1}.markdown-body.slides:before{background-color:currentColor;bottom:0;box-shadow:0 0 0 50vw;content:"";display:block;left:0;position:absolute;right:0;top:0;z-index:-1}.markdown-body.slides section[data-markdown]{background-color:#fff;margin-bottom:1.5em;position:relative;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{left:1em;max-height:100%;overflow:hidden;position:absolute;right:1em;top:50%;transform:translateY(-50%)}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{border:3px solid #777;content:"";height:1.5em;position:absolute;right:1em;top:-1.5em}.site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif}html[lang=zh-tw] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}html[lang^=ja] body{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif}html[lang=zh-tw] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}abbr[data-original-title],abbr[title]{cursor:help}body.modal-open{overflow-y:auto;padding-right:0!important}svg{text-shadow:none}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid comment-inner comment-enabled" data-hard-breaks="true"><h1 id="數據科學概論-HW8" data-id="數據科學概論-HW8"><a class="anchor hidden-xs" href="#數據科學概論-HW8" title="數據科學概論-HW8"><span class="octicon octicon-link"></span></a><span>數據科學概論 HW8</span></h1><h2 id="Data-Overview" data-id="Data-Overview"><a class="anchor hidden-xs" href="#Data-Overview" title="Data-Overview"><span class="octicon octicon-link"></span></a><span>Data Overview</span></h2><p><img src="https://hackmd.io/_uploads/H1MZ4zAN6.png" alt="image" loading="lazy"><br>
+<br></p><ul>
+<li><span>我蒐集了四份有關於 Elon Musk 的 txt, 並用 VCorpus 和 DirSource 建造一個 directory 來收納這些文字檔</span><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/BywHSMAVp.png" alt="image" loading="lazy"><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/Skt1UfAEp.png" alt="image" loading="lazy"><br>
+<img src="https://hackmd.io/_uploads/r1ME8fRV6.png" alt="image" loading="lazy"><br>
+<img src="https://hackmd.io/_uploads/ryLdLG0Na.png" alt="image" loading="lazy"><br>
+<img src="https://hackmd.io/_uploads/B1_n8MAVa.png" alt="image" loading="lazy"><br>
+<img src="https://hackmd.io/_uploads/BJV0IMAEa.png" alt="image" loading="lazy"><br>
+<br></li>
+<li><span>我用 inspect 和 writeLines 來觀察文字檔的架構和內容</span><br>
+<br></li>
+</ul><h2 id="Text-Mining" data-id="Text-Mining"><a class="anchor hidden-xs" href="#Text-Mining" title="Text-Mining"><span class="octicon octicon-link"></span></a><span>Text Mining</span></h2><h3 id="Cleaning-up-Text-Data" data-id="Cleaning-up-Text-Data"><a class="anchor hidden-xs" href="#Cleaning-up-Text-Data" title="Cleaning-up-Text-Data"><span class="octicon octicon-link"></span></a><span>Cleaning up Text Data</span></h3><p><img src="https://hackmd.io/_uploads/Hk7MlX0Vp.png" alt="image" loading="lazy"><br>
+<img src="https://hackmd.io/_uploads/S1x4xXCN6.png" alt="image" loading="lazy"><br>
+<img src="https://hackmd.io/_uploads/SJrHxXCEp.png" alt="image" loading="lazy"><br>
+<br></p><ul>
+<li><span>我用 tm_map 消除了標點符號, 特殊字元, 數字, stop words, 進行 stemming 和 Stripping unnecessary whitespace, 並把所有文字轉成小寫, 然後用 writeLines 來檢查是否有起作用, 結果可以發現有起作用, 但我發現 stemming 造成許多不存在的字出現了, 例 : leaving -&gt; leav, future -&gt; futur, 所以我決定不做 stemming</span><br>
+<br></li>
+</ul><h3 id="Building-the-term-document-matrix" data-id="Building-the-term-document-matrix"><a class="anchor hidden-xs" href="#Building-the-term-document-matrix" title="Building-the-term-document-matrix"><span class="octicon octicon-link"></span></a><span>Building the term document matrix</span></h3><p><img src="https://hackmd.io/_uploads/ByYBMQC4a.png" alt="image" loading="lazy"><br>
+<br></p><ul>
+<li><span>用 DocumentTermMatrix 來建造 document matrix</span><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/ryqCzX046.png" alt="image" loading="lazy"><br>
+<br></li>
+<li><span>把 document matrix 轉換成 regular matrix, 用 dim 可以看到有四份文字檔, 且總共有 1748 個不同的字</span><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/SkrOHQRNT.png" alt="image" loading="lazy"><br>
+<br></li>
+</ul><pre><code>                      ‘’d                       ‘’s                    ‘cause 
+                        1                         1                         1 
+                   ‘crazy                   ‘fourth                       ‘oh 
+                        1                         1                         1 
+                      ’ll                       ’re                       ’s… 
+                       12                        35                         3 
+                      ’ve                      able                 aboutmany 
+                        7                        15                         1 
+          aboutminimizing                   absence                 abundance 
+                        1                         1                         1 
+             accelerating                    accept                    access 
+                        3                         1                         1 
+                 accident              accomplished                 according 
+                        1                         1                         1 
+                  accused                   achieve    achievedemocratization 
+                        1                         5                         1 
+                   acrazy                    across                   actions 
+                        1                         2                         2 
+                 activity                    actual                  actually 
+                        1                         1                        36 
+                     adam                    admire                     adopt 
+                        1                         3                         1 
+                  advance                  advanced               advancement 
+                        3                        10                         3 
+                   advent                 adventure                    advice 
+                        1                         1                         7 
+                   advise                 aerospace                      afew 
+                        1                         1                         1 
+                   affect                   affects                affordable 
+                        5                         2                         1 
+                   agency                       ago                    agreed 
+                        1                         8                         1 
+                  aihuman                      aiis                       air 
+                        1                         1                         4 
+                 aircraft                 aiworking                    albert 
+                        3                         1                         1 
+                algorithm                   alibaba                     alien 
+                        1                         2                         4 
+                   aliens              alkhawarizmi                  allocate 
+                        9                         1                         1 
+                    allow                    allows                    almost 
+                        1                         1                        11 
+                    along                   already                      also 
+                        2                        10                         6 
+              alternative              alternatives                    always 
+                        1                         2                        13 
+               alzheimers                   amazing            ambitiousyoung 
+                        1                         3                         1 
+                 american                     among                    amount 
+                        1                         4                         1 
+                  analogy                analytical                   ancient 
+                        2                         1                         1 
+               andgeneral      andmatterinterviewer              andobviously 
+                        1                         1                         1 
+                     ands                andwhatnot                andwilling 
+                        1                         1                         1 
+                   animal                   another                    answer 
+                        2                         5                         2 
+                   anyone                  anything         anywayinterviewer 
+                        4                         8                         1 
+                 anywhere                      aone                    appear 
+                        1                         1                         1 
+             applications                  approach               approaching 
+                        2                         3                         1 
+               approachto              aqueductsand              architecture 
+                        1                         1                         1 
+                     area                     arein                    around 
+                        4                         1                         6 
+                      art                    arthur                   article 
+                        2                         1                         1 
+               artificial                       ask                     asked 
+                       16                        10                         3 
+                   asking                    assess                assessment 
+                        1                         1                         1 
+                   assume                  assuming               assumptions 
+                        3                         2                         1 
+                 asthough       atopenaiinterviewer                    atrome 
+                        1                         1                         1 
+               atstanford                 attention                    atthis 
+                        1                         1                         1 
+               attractive                 augmented             automatically 
+                        1                         1                         1 
+               automation        automationcompared                autonomous 
+                        1                         1                         4 
+                 autonomy                 available                     avoid 
+                        6                         3                         1 
+                    aware                      away                      back 
+                        1                         4                        12 
+                 backelon                background                       bad 
+                        1                         1                         5 
+                     ball                 bandwidth      bandwidthconstrained 
+                        2                        11                         1 
+      bandwidthconstraint                      base                     based 
+                        1                         1                         1 
+                    basic                 basically                     basis 
+                        5                         7                         3 
+                      bat                     baton                 batteries 
+                        1                         1                         2 
+                  batting                      bear                   bearing 
+                        1                         1                         1 
+               becauseyou                becombined                    become 
+                        1                         1                         4 
+                  becomes                  becoming                    beelon 
+                        2                         1                         1 
+                    began                 beginning                    behind 
+                        1                         1                         1 
+                   beings                   believe                    benign 
+                       12                         4                         1 
+                    beone                      best                      beta 
+                        1                        14                         1 
+                   better               bewonderful                    beyond 
+                       22                         1                         9 
+                      big                 bigdanger                   biggest 
+                        4                         1                         8 
+                 biggest…                   billion                biological 
+                        1                         6                         2 
+                biosphere                       bit                      bits 
+                        1                         7                         3 
+                  blowing                borderline                      born 
+                        1                         1                         1 
+                      box                     brain                    brains 
+                        1                         9                         2 
+                    break              breakthrough                     bring 
+                        1                         3                         2 
+                  broadly                  brothers                    budget 
+                        1                         2                         3 
+                     bugs                     build                  building 
+                        2                         4                         2 
+                buildings                    builds                buildthese 
+                        4                         1                         1 
+                    built                     bunch                    burned 
+                        6                         1                         1 
+                 business                 businessy                      busy 
+                        5                         1                         1 
+              butactually                    button                   butwhat 
+                        1                         1                         1 
+                      buy                    buying               byimproving 
+                        2                         1                         1 
+                calculate              calculations                calculator 
+                        1                         2                         1 
+               california                      call                    called 
+                        1                         1                         4 
+                     came                    camera                       can 
+                       11                         1                        81 
+                    can’t                      cant                capability 
+                        7                         1                         1 
+                capacitor                  capacity                   capital 
+                        1                         1                         2 
+                      car                      car’                      care 
+                        8                         1                         4 
+                   career                   careful                   carried 
+                        1                         1                         1 
+                    carry                      cars                  carselon 
+                        1                        11                         1 
+                     cart                      case                    causes 
+                        1                         1                         1 
+                     cent               centimeters                   century 
+                        3                         1                         2 
+                  certain                 certainly                 challenge 
+                       11                         2                         8 
+               challenges                    chance                    change 
+                        4                         1                         9 
+                  chapter              characterize                  charging 
+                        1                         1                         1 
+                   charm’                     cheap                     chief 
+                        1                         2                         1 
+               chimpanzee               chimpanzees                     china 
+                        1                         1                         2 
+                   choice                    choose                    cities 
+                        2                         1                         4 
+                     city              civilization             civilizations 
+                        2                         8                         1 
+        civilizationsmany                     clark                     class 
+                        1                         1                         1 
+                    clear                   clearly                  cleverer 
+                        4                         1                         1 
+                    close                closedloop                    closer 
+                        5                         1                         1 
+                  closest                     coals                      cold 
+                        1                         1                         1 
+             collectively                   college                  colonial 
+                        2                         3                         1 
+                   colony                  colonyim                      come 
+                        2                         1                        13 
+                   coming                    common               communicate 
+                        2                         1                         3 
+            communication                 companies              companieshad 
+                        2                         3                         1 
+                  company               companyelon                 companyin 
+                        7                         1                         1 
+                 compared                completely               complicated 
+                        1                         3                         2 
+                  compute                  computer                 computers 
+                        2                        10                         4 
+                  concern                conclusion                confidence 
+                        1                         5                         2 
+                confident                  confined                 confusing 
+                        3                         1                         1 
+               congestion            conglomeration                connection 
+                        2                         2                         2 
+            consciousness                  consider                considered 
+                       11                         1                         1 
+             constructive               consumption                   contact 
+                        3                         1                         1 
+                 context…                  continue                   control 
+                        1                         2                         5 
+               controlled            controlproblem               convenience 
+                        2                         1                         1 
+               convincing                      cool                   correct 
+                        1                         2                         2 
+               corrective                    cortex                 cortexand 
+                        2                         6                         1 
+        cortexinterviewer                 cosmetics                      cost 
+                        1                         1                         5 
+                   costs…                     count         counter–intuitive 
+                        1                         1                         1 
+                  courage                    course                    crafts 
+                        1                         3                         1 
+                    crazy                   crazyif                    create 
+                       10                         1                        13 
+                  created                   creates                  creating 
+                        3                         1                         1 
+                 creation                  creative                    crisis 
+                        1                         4                         1 
+                 critical                   crystal                   curious 
+                        2                         1                         1 
+                  current                 currently currentlybandwidthlimited 
+                        1                         1                         1 
+                    curve                 curveelon                    curvei 
+                        2                         1                         1 
+         curveinterviewer                    cyborg                    danger 
+                        1                         1                         1 
+                dangerous                     dates                       day 
+                        2                         1                         3 
+                     days                      deal                   dealing 
+                        3                         3                         1 
+                    death                     debut                   decided 
+                        1                         1                         3 
+                 decision                 decisions                   decline 
+                        1                         1                         1 
+                dedicated                      deep                    deeper 
+                        1                         4                         2 
+                  deepest                definitely                    degree 
+                        1                         1                         4 
+               dehydrated                   deliver                     delta 
+                        1                         1                         1 
+                   demand                dementiaor           democratization 
+                        2                         1                         1 
+            demonstration                   density                    derive 
+                        1                         1                         1 
+              description                    design                  designed 
+                        1                         4                         1 
+                  despite                 destroyed                    detail 
+                        2                         1                         1 
+                  details                   develop                 developed 
+                        1                         1                         2 
+               developing               development                    device 
+                        2                         1                         1 
+                 dictator                    didn’t                     didnt 
+                        2                         4                         3 
+                      die                      died                      dies 
+                       12                         2                         1 
+               difference             differencebut                 different 
+                        4                         1                         4 
+                difficult                difficulty                   digital 
+                        9                         2                        10 
+                 digital…                diminishes                 direction 
+                        1                         1                         1 
+            directionally                  directly                  disagree 
+                        1                         1                         1 
+                 diseases                   disrupt                disruption 
+                        1                         1                         1 
+               disruptive                 distances              distillation 
+                        1                         1                         1 
+                  disturb                disturbing                      dock 
+                        1                         1                         1 
+                doctorate                   doesn’t                    doesnt 
+                        1                         1                         5 
+                  dollars                     don’t                      done 
+                        6                        26                         2 
+                     dont                    doomed                      door 
+                        7                         1                         1 
+                      dot                     doyou                    dragon 
+                        1                         1                         2 
+             dramatically                     drawn                     dream 
+                        1                         1                         1 
+                   dreams                     drive                   driving 
+                        1                         3                         1 
+                     drop                     dubai                      dumb 
+                        1                         3                         1 
+                    dying                   earlier                  earliest 
+                        2                         1                         1 
+                    early                     earth                   earth’s 
+                        1                        34                         3 
+                   easily                      easy                     eaten 
+                        1                         3                         1 
+                  economy                 education                 effective 
+                        1                         6                         1 
+              effectively                    effort                   efforts 
+                        3                         1                         1 
+                    egypt                  einstein                    either 
+                        1                         1                         5 
+                 electric               electricity           electrification 
+                        6                         5                         1 
+                 elevator                 elevators                      elon 
+                        2                         1                        10 
+                     else                     email         emailcapabilities 
+                        3                         3                         1 
+                   emails                   embrace                 emphasize 
+                        1                         1                         1 
+                 employer                employment                  enabling 
+                        1                         2                         1 
+                encourage                       end                    energy 
+                        1                         3                         7 
+            energystorage               engineering                 engineers 
+                        1                         5                         2 
+                engrossed                     enjoy               enlightened 
+                        1                         2                         1 
+                   enough                    ensure                    entire 
+                        9                         4                         1 
+                 entirely                 entropyis                  envelope 
+                        2                         1                         1 
+              environment                  epiphany                 equations 
+                        3                         1                         2 
+                    error                    escape                  esoteric 
+                        3                         1                         1 
+               especially                   essence               essentially 
+                        3                         2                         2 
+             establishing                  estimate                 estimates 
+                        1                         1                         1 
+                      eve                      even                     even… 
+                        1                        21                         1 
+                    event                eventually                      ever 
+                        1                         4                         1 
+                    every                 everybody                  everyone 
+                        6                         1                         2 
+               everything                      evil                 evolution 
+                        6                         2                         1 
+                    exact                   exactly                   example 
+                        1                         7                         2 
+                 examples                 exceeding                    except 
+                        1                         1                         1 
+                  excited                  exciting                 existence 
+                        2                         3                         1 
+              existential                    exists                    expand 
+                        2                         1                         2 
+                expanding                    expect                 expensive 
+                        1                         2                         1 
+               experience               explanation               exploration 
+                        1                         1                         1 
+                  explore                 explorers                 exploring 
+                        2                         1                         1 
+                   extend                 extending                 extension 
+                        2                         2                         5 
+                 external              extinguished                     extra 
+                        1                         1                         1 
+              extrapolate                   extreme                 extremely 
+                        1                         1                         3 
+                      eye                      face                      fact 
+                        1                         1                         8 
+                  factory            factorybecause                    failed 
+                        1                         1                         2 
+                     fair                    fairly                    falcon 
+                        1                         2                         3 
+                    false                    famous                 fantastic 
+                        1                         1                         1 
+                      far                      fast                  fastelon 
+                        4                         5                         1 
+                   faster                   fastest                  fatalism 
+                        7                         1                         1 
+                     fear           fearinterviewer                  fearless 
+                        5                         2                         1 
+                  feature                   federal                  feedback 
+                        1                         1                         4 
+                     feel                   feeling                     fewer 
+                        7                         1                         2 
+                  fiction                     fight                    figure 
+                        1                         1                         6 
+                  figured                  figuring                   finally 
+                        1                         1                         1 
+                  finance                 financial                      find 
+                        1                         4                         7 
+                     fine                   fingers                     first 
+                        5                         1                        17 
+                     five                    flight                       fly 
+                        4                         8                         3 
+                    focus                   focused   foldincreaseinterviewer 
+                        2                         1                         1 
+                   follow                      fond                      food 
+                        1                         1                         1 
+                    force                    forces                      ford 
+                        2                         1                         1 
+                  forever                    forget                    forgot 
+                        2                         1                         3 
+                     form                    former                     forms 
+                        3                         1                         1 
+                    forth               fortunately                   forward 
+                        1                         2                         2 
+                     four                    fourth                 framework 
+                        3                         1                         2 
+                  frankly                      free                frequently 
+                        1                         2                         1 
+                   friend                   friends                     front 
+                        1                         2                         1 
+                     full                     fully                       fun 
+                        3                         4                         4 
+                 function               fundamental             fundamentally 
+                        1                         1                         1 
+                 furthest                    future                   futures 
+                        2                        42                         1 
+                     gain                    galaxy                      game 
+                        1                         2                         6 
+                    games                       gdp                       gel 
+                        6                         1                         1 
+                  general                 generally                generation 
+                        3                         5                         1 
+                 generous                   genetic                  genetics 
+                        2                         2                         2 
+                      get           getconcentrated                      gets 
+                       32                         1                         3 
+                  getting                     ghost               gigafactory 
+                        6                         1                         1 
+                     give                     given                    global 
+                        1                         2                         1 
+                 globally                     globe                      goal 
+                        2                         2                         5 
+               godecision                      goes                     going 
+                        1                         4                        51 
+                     golf                      gone                      good 
+                        1                         2                        15 
+          goodinterviewer                  goodness                     goods 
+                        1                         1                         1 
+                   google                       got                    gotten 
+                        2                        12                         1 
+               government               governments                      grad 
+                        4                         2                         1 
+                    grade                graduation                     grand 
+                        2                         1                         1 
+              grandfather             grandfather’s                   granted 
+                        1                         1                         3 
+                  gravity                     great                   greater 
+                        3                        18                         3 
+                    green                     group                      grow 
+                        1                         2                         1 
+                  growing                     guess                    guilty 
+                        1                         3                         1 
+                      gut                       guy                      guys 
+                        1                         1                         2 
+           gwynneshotwell                    hadn’t                      half 
+                        1                         1                         6 
+                    hands                    happen                  happened 
+                        1                        15                         2 
+                  happens                   happier                     happy 
+                        5                         1                         1 
+                     hard                    harder                      harm 
+                        3                         4                         1 
+                   hasn’t                     hatch                      hate 
+                        2                         1                         1 
+          haveinterviewer           havingsomething                healthcare 
+                        1                         1                         1 
+                healthier                      hear                     heard 
+                        1                         3                         1 
+                  heating                      heck                      help 
+                        2                         1                         3 
+                  helpful                   helping                     helps 
+                        4                         2                         2 
+                    henry             hieroglyphics                      high 
+                        1                         2                         6 
+            highbandwidth                     hills                   history 
+                        2                         1                         4 
+                     hold                  honestly                     honor 
+                        2                         1                         1 
+                     hope                 hopefully                     hours 
+                        8                         2                         1 
+                     huge                     human                  humanity 
+                        2                        33                         8 
+                humanity’                humanityso                    humans 
+                        1                         1                         8 
+                  hundred             hundreddollar                   hydrate 
+                        2                         1                         1 
+                iadvocate                     icbm…                      idbe 
+                        1                         1                         1 
+                     idea                     ideas                     idont 
+                        2                         4                         1 
+                    ifits                  ifpeople                    ignore 
+                        1                         1                         2 
+                  imagery               imagination                   imagine 
+                        1                         1                         3 
+                 imagined               immediately                    impact 
+                        1                         1                         2 
+               impactelon                    impair                  impaired 
+                        1                         1                         1 
+               importance                 important                impossible 
+                        1                        22                         6 
+                impressed                impression                impressive 
+                        1                         3                         1 
+                  improve                  improved               improvement 
+                        4                         1                         2 
+                improving                  includes                 including 
+                        2                         1                         2 
+                   income                incomplete                  increase 
+                        5                         1                         5 
+               incredible                incredibly         indistinguishable 
+                        2                         4                         3 
+              individuals                    indoor                industrial 
+                        1                         1                         1 
+                 industry                     ineed                inflection 
+                        4                         1                         1 
+              information            infrastructure                   initial 
+                        1                         1                         5 
+                initially                innovation                     input 
+                        2                         1                         5 
+                   insane                    inside                 inspiring 
+                        2                         1                         2 
+                  instant                 instantly                   instead 
+                        2                         2                         1 
+                instincts                 insurance                integrated 
+                        1                         1                         4 
+             intelligence               intelligent                  intended 
+                       25                         4                         2 
+               intentions                  interest                interested 
+                        1                         1                         5 
+              interesting                 interface                   interms 
+                        2                         5                         1 
+                   intern                  internal                  internet 
+                        1                         2                         9 
+                interview               interviewer                  invasion 
+                        1                         1                         1 
+                 invented                 inventing                investment 
+                        2                         1                         1 
+                 involved               irreducible                     isbad 
+                        2                         1                         1 
+                ishouldnt                    iskind                     isn’t 
+                        1                         1                         2 
+                    issue                    issues              iswidespread 
+                        1                         1                         1 
+             itanywayelon                  itbetter                      item 
+                        1                         1                         3 
+                itforward                    ithink                      itin 
+                        1                         3                         1 
+</code></pre><br><ul>
+<li><span>我用 freq 來獲取每個字出現的頻率, 由於篇幅有限, 我只列出一部份</span><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/H1p_wmCN6.png" alt="image" loading="lazy"><br>
+<br></li>
+<li><span>我用 removeSparseTerms 把 sparse terms 移除, and makes the matrix that is 20% empty space, maximum</span><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/S1Yf_XAEa.png" alt="image" loading="lazy"><br>
+<br></li>
+</ul><pre><code>            able       actually            ago         almost           also 
+            15             36              8             11              6 
+        always       anything           back           best         better 
+            13              8             12             14             22 
+          came            can            die          earth         enough 
+            11             81             12             34              9 
+    everything      extension           fact          first         future 
+             6              5              8             17             42 
+           get          going            got          great         happen 
+            32             51             12             18             15 
+          hope      important           just           know           life 
+             8             22             47             43             37 
+          like         likely           long           look            lot 
+            89              7             11             14             23 
+          made           make         making           many           mars 
+             8             37             12             16             31 
+           may          maybe           mean multiplanetary           need 
+             8             24             22              9             15 
+           now           okay            one         people          point 
+            18             11             35             86              8 
+      possible       probably       problems          quite         really 
+            11             20              8             20             51 
+         right           said            say         saying            see 
+            15             10             29              5             12 
+          seem           slow          solve      something           sort 
+             5              7              7             38             15 
+         still          stuff           sure    sustainable           take 
+             8              6             19              7             14 
+    technology           tell          thank          thing         things 
+            25             14             12             17             52 
+         think           time          today            try         trying 
+           143             31             12             16              8 
+           two           want            way           well           will 
+            13             38             24             37             65 
+          work          world          wrong          years 
+            10             24             16             38
+</code></pre><br><ul>
+<li><span>再用 freq 獲取每個字出現的頻率, 並列出</span><br>
+<br></li>
+</ul><pre><code>    think      like    people       can      will    things     going 
+      143        89        86        81        65        52        51 
+   really      just      know    future something      want     years 
+       51        47        43        42        38        38        38 
+     life      make      well  actually      yeah       ’re 
+       37        37        37        36        36        35
+</code></pre><br><pre><code>          women            word           words         world’s 
+              1               1               1               1 
+          worst   wouldactually        wouldthe            wrap 
+              1               1               1               1 
+        writing           yeah… yeahinterviewer          years… 
+              1               1               1               1 
+           youd         youelon     youfamously     youretrying 
+              1               1               1               1 
+       yourtime      youthought            zero      zeropeople 
+              1               1               1               1
+</code></pre><br><ul>
+<li><span>利用 head, tail, sort, 來觀察出現頻率前二十和後二十的字</span><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/B1SjcXCNp.png" alt="image" loading="lazy"><br>
+<br></li>
+<li><span>用 findFreqTerms 找出現頻率高於 50 的字</span><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/BJ6NiQRET.png" alt="image" loading="lazy"><br>
+<br></li>
+<li><span>把 sort 後的字和其出現頻率做成 data frame</span><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/S1ck0XAE6.png" alt="image" loading="lazy"><br>
+<br></li>
+<li><span>我把出現頻率高於 20 的字畫成頻率遞減的圖</span><br>
+<br></li>
+</ul><h3 id="Word-Association" data-id="Word-Association"><a class="anchor hidden-xs" href="#Word-Association" title="Word-Association"><span class="octicon octicon-link"></span></a><span>Word Association</span></h3><p><img src="https://hackmd.io/_uploads/SypkkNC4p.png" alt="image" loading="lazy"><br>
+<br></p><ul>
+<li><span>我用 findAssocs 找和 well 相關率超過 70% 的字</span><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/Bkadk4RN6.png" alt="image" loading="lazy"><br>
+<br></li>
+<li><span>我用 findAssocs 分別找和 just, things, make 相關率超過 80% 的字</span><br>
+<br></li>
+</ul><h3 id="Word-Cloud" data-id="Word-Cloud"><a class="anchor hidden-xs" href="#Word-Cloud" title="Word-Cloud"><span class="octicon octicon-link"></span></a><span>Word Cloud</span></h3><p><img src="https://hackmd.io/_uploads/BkRfMVAN6.png" alt="image" loading="lazy"><br>
+<br></p><ul>
+<li><span>我畫出由頻率至少 10 的字組成的文字雲</span><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/SyxiM4A46.png" alt="image" loading="lazy"><br>
+<br></li>
+<li><span>我畫出由一百個字組成的文字雲</span><br>
+<br></li>
+</ul><h3 id="Clustering" data-id="Clustering"><a class="anchor hidden-xs" href="#Clustering" title="Clustering"><span class="octicon octicon-link"></span></a><span>Clustering</span></h3><p><img src="https://hackmd.io/_uploads/S1la8NRN6.png" alt="image" loading="lazy"><br>
+<br></p><ul>
+<li><span>計算 Euclidean distance matrix, 然後 for a different look try substituting : method = “ward.D”</span><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/HJFXD4CNT.png" alt="image" loading="lazy"><br>
+<br></li>
+<li><span>畫出 Dendrogram, 並將這些字分成 6 組, 把他們框起來</span><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/By7CdNRNT.png" alt="image" loading="lazy"><br>
+<br></li>
+<li><span>我用 kmean 分成兩群並畫圖</span><br>
+<br></li>
+</ul><h3 id="Classification" data-id="Classification" data-original-title="" title=""><a class="anchor hidden-xs" href="#Classification" title="Classification"><span class="octicon octicon-link"></span></a><span>Classification</span></h3><p><img src="https://hackmd.io/_uploads/S13CTNCET.png" alt="image" loading="lazy"><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/Hy6w3EC4p.png" alt="image" loading="lazy"><br>
+<br></p><ul>
+<li><span>生成 train 和 test 的資料</span><br>
+<br></li>
+</ul><pre><code>  [1] "’ll"           "’re"           "able"          "actually"     
+  [5] "advanced"      "almost"        "already"       "always"       
+  [9] "artificial"    "ask"           "back"          "bandwidth"    
+ [13] "beings"        "best"          "better"        "came"         
+ [17] "can"           "cars"          "certain"       "come"         
+ [21] "computer"      "consciousness" "crazy"         "create"       
+ [25] "die"           "digital"       "don’t"         "earth"        
+ [29] "elon"          "even"          "first"         "future"       
+ [33] "get"           "going"         "good"          "got"          
+ [37] "great"         "happen"        "human"         "important"    
+ [41] "intelligence"  "jobs"          "just"          "kind"         
+ [45] "know"          "life"          "like"          "long"         
+ [49] "look"          "lot"           "make"          "making"       
+ [53] "many"          "mars"          "maybe"         "mean"         
+ [57] "much"          "need"          "now"           "okay"         
+ [61] "one"           "past"          "people"        "per"          
+ [65] "possible"      "pretty"        "probably"      "quite"        
+ [69] "really"        "right"         "rocket"        "run"          
+ [73] "said"          "say"           "see"           "seems"        
+ [77] "something"     "sort"          "space"         "spacex"       
+ [81] "spend"         "sure"          "take"          "technology"   
+ [85] "tell"          "tesla"         "thank"         "thats"        
+ [89] "thing"         "things"        "think"         "thought"      
+ [93] "time"          "times"         "today"         "true"         
+ [97] "try"           "two"           "want"          "way"          
+[101] "well"          "will"          "work"          "world"        
+[105] "wrong"         "yeah"          "years"         "class_label"
+</code></pre><br><ul>
+<li><span>秀出頻率高於 10 的字</span><br>
+<br></li>
+</ul><h4 id="Logistic-Regression" data-id="Logistic-Regression"><a class="anchor hidden-xs" href="#Logistic-Regression" title="Logistic-Regression"><span class="octicon octicon-link"></span></a><span>Logistic Regression</span></h4><p><img src="https://hackmd.io/_uploads/H12QGBCE6.png" alt="image" loading="lazy"><br>
+<br></p><ul>
+<li><span>用 Logistic Regression 預測成功機率是 50%</span><br>
+<br></li>
+</ul><h4 id="Support-Vector-Machine" data-id="Support-Vector-Machine"><a class="anchor hidden-xs" href="#Support-Vector-Machine" title="Support-Vector-Machine"><span class="octicon octicon-link"></span></a><span>Support Vector Machine</span></h4><p><img src="https://hackmd.io/_uploads/Hkkh7SCET.png" alt="image" loading="lazy"><br>
+<br></p><ul>
+<li><span>我使用 kernel = “radial” 的 svm model, 並把參數 gamma 設為 0.00390625, cost 設為 0.25</span><br>
+<br><br>
+<img src="https://hackmd.io/_uploads/Bk11rrC4T.png" alt="image" loading="lazy"><br>
+<br></li>
+<li><span>用 svm 預測成功機率也是 50%</span><br>
+<br></li>
+</ul><h2 id="Conclusion" data-id="Conclusion"><a class="anchor hidden-xs" href="#Conclusion" title="Conclusion"><span class="octicon octicon-link"></span></a><span>Conclusion</span></h2><ul>
+<li><span>本來做 stemming 可以有效的刪除許多實質上是一樣的字, 但也有很多字變得不再是一個存在的英文字了, 因此我覺得弊大於利, 故而放棄 stemming</span><br>
+<br></li>
+<li><span>由於我的樣本數太少, 在進行 Classification 的時候所生成的 train 和 test 也很少, 所以我認為我使用的兩個 model 預測成功機率低是必然的結果</span><br>
+<br></li>
+</ul></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#數據科學概論-HW8" title="數據科學概論 HW8">數據科學概論 HW8</a><ul class="nav">
+<li><a href="#Data-Overview" title="Data Overview">Data Overview</a></li>
+<li><a href="#Text-Mining" title="Text Mining">Text Mining</a><ul class="nav">
+<li><a href="#Cleaning-up-Text-Data" title="Cleaning up Text Data">Cleaning up Text Data</a></li>
+<li><a href="#Building-the-term-document-matrix" title="Building the term document matrix">Building the term document matrix</a></li>
+<li><a href="#Word-Association" title="Word Association">Word Association</a></li>
+<li><a href="#Word-Cloud" title="Word Cloud">Word Cloud</a></li>
+<li><a href="#Clustering" title="Clustering">Clustering</a></li>
+<li><a href="#Classification" title="Classification">Classification</a></li>
+</ul>
+</li>
+<li class=""><a href="#Conclusion" title="Conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">全部展開</a><a class="back-to-top" href="#">回到頂部</a><a class="go-to-bottom" href="#">移至底部</a></div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;" null null>
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#數據科學概論-HW8" title="數據科學概論 HW8">數據科學概論 HW8</a><ul class="nav">
+<li><a href="#Data-Overview" title="Data Overview">Data Overview</a></li>
+<li><a href="#Text-Mining" title="Text Mining">Text Mining</a><ul class="nav">
+<li><a href="#Cleaning-up-Text-Data" title="Cleaning up Text Data">Cleaning up Text Data</a></li>
+<li><a href="#Building-the-term-document-matrix" title="Building the term document matrix">Building the term document matrix</a></li>
+<li><a href="#Word-Association" title="Word Association">Word Association</a></li>
+<li><a href="#Word-Cloud" title="Word Cloud">Word Cloud</a></li>
+<li><a href="#Clustering" title="Clustering">Clustering</a></li>
+<li><a href="#Classification" title="Classification">Classification</a></li>
+</ul>
+</li>
+<li class=""><a href="#Conclusion" title="Conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">全部展開</a><a class="back-to-top" href="#">回到頂部</a><a class="go-to-bottom" href="#">移至底部</a></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>

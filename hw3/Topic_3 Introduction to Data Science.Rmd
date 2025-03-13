@@ -1,0 +1,213 @@
+---
+title: "Topic_3 Introduction to Data Science"
+author: "TA Kiran"
+date: "2023-09-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Set the Working Directory:
+setwd("/Users/kirankumarisheshma/Desktop/Introduction To data science/Topic-3")
+
+#Get Current Working Directory
+getwd()
+```
+
+**Reading Data – Case Study: Health Survey**
+```{r}
+data <- read.csv("survey.csv") #read csv file
+## View the first few rows of the data frame
+head(data, 10)
+
+## View the last few rows of the data frame
+tail(data,5)
+
+```
+
+```{r}
+#class() function is used to determine the class or data type of an object
+class(data)
+# Check the structure of the data frame
+str(data)
+# View summary statistics of the data frame
+summary(data)
+```
+
+```{r}
+data[c(1, 2, 3, 4, 5,6,7), ]
+data[1:10, ]
+```
+
+**convert factor into ordinal variable**
+
+```{r}
+# Load the 'ordinal' package
+data$smoke
+```
+
+```{r}
+# Load the 'ordinal' package
+library(ordinal)
+
+data$smoke <- ordered(data$smoke,
+                      levels = c("Never", "Occas", "Regul", "Heavy"))
+data$smoke
+```
+
+
+```{r}
+#Another Example of the Ordinal() Function Use
+
+# Create an ordinal variable
+satisfaction <- ordered(c("Very Dissatisfied", "Dissatisfied", "Neutral", "Satisfied", "Very Satisfied"), 
+                        levels = c("Very Dissatisfied", "Dissatisfied", "Neutral", "Satisfied", "Very Satisfied"))
+
+# Print the ordinal variable
+print(satisfaction)
+```
+
+**unique() function**
+
+-  It is a helpful function for identifying distinct values within a dataset. 
+```{r}
+##Cleaning up data - Data entry error
+unique(data$sex) #get unique value
+unique(data$height)
+unique(data[2])  # using Index
+```
+
+**Use the For loop to get all togther**
+```{r}
+# Create an empty list to store unique values for each column
+unique_values <- list()
+
+# Loop through columns using a for loop
+for (col_name in colnames(data)) {
+  unique_values <- unique(data[col_name])
+  #print(unique_values) 
+  # Print unique values for each column
+  for (col_name in names(unique_values)) {
+  cat("Unique values in column", col_name, ":", unique_values[[col_name]], "\n")
+}#Access the column by name
+}
+
+```
+
+**using the lapply () function**
+```{r}
+unique_values <- lapply(data, unique)
+print(unique_values)
+```
+
+**Missing Values**
+- In R, the complete.cases() function is used to identify rows in a data frame or matrix that have complete cases, i.e., rows with no missing (NA) values.
+```{r}
+# Count rows with complete cases (no missing values)
+cat("Number of complete rows:", sum(complete.cases(data)), "\n")
+
+# Count rows with missing values
+cat("Number of rows with missing values:", sum(!complete.cases(data)), "\n") 
+```
+**Check for the total number of missing values in each column**
+
+```{r}
+# Count rows with missing values
+cat("Number of rows with missing values:", sum(!complete.cases(data$sex)), "\n") 
+# Count rows with missing values
+cat("Number of rows with missing values:", sum(!complete.cases(data$height)), "\n") 
+# Count rows with missing values
+cat("Number of rows with missing values:", sum(!complete.cases(data$weight)), "\n") 
+```
+**Check for the total number of missing values in each column in a data frame**
+```{r}
+# Create an empty list to store missing values for each column
+missing_values <- list()
+
+# Loop through columns using a for loop
+for (col_name in colnames(data)) {
+  missing_values <- sum(!complete.cases(data[col_name]))
+  cat("missing values in column", col_name, ":", missing_values, "\n")
+}
+```
+**Check for the Position of the Missing values in each columns**
+
+- In R, you can use the which(is.na()) combination of functions to identify the indices (positions) of missing (NA) values within a vector, matrix, or data frame.
+```{r}
+
+###Cleaning up data - Missing value
+which(is.na(data$sex)) #check where is the missing value
+which(is.na(data$height)) #check where is the missing value
+```
+
+```{r}
+# Create an empty list to store missing values position for each column
+position_of_Missing_values <- list()
+
+# Loop through columns using a for loop
+for (col_name in colnames(data)) {
+  position_of_Missing_values <- which(is.na(data[col_name])) 
+  cat("position of the missing values in each column", col_name, ":", position_of_Missing_values, "\n")
+}
+```
+
+**Cleaning the dataset**
+```{r}
+data$sex[data$sex == 'F'] = 'Female' # replace 'F" to 'Female'
+data$sex[data$sex == 'M'] = 'Male'   # replace 'M' to 'Male'
+unique(data$sex)
+```
+
+**Replace continuous data with mean**
+
+```{r}
+#Calculate the mean of female heights (ignoring missing values)
+female.height <- mean(data$height[which(data$sex == 'Female')], na.rm=T)
+female.height
+## Calculate the mean of male heights (ignoring missing values)
+male.height <- mean(data$height[which(data$sex == 'Male')], na.rm=T)
+male.height
+#replace NA with mean of female & male height 
+data$height[which(data$sex == 'Female' & is.na(data$height))] = female.height
+data$height[which(data$sex == 'Male' & is.na(data$height))] = male.height
+unique(data$height)
+```
+**Replace categorical data with bootstrap in R**
+
+```{r}
+bootstrap <- function(series){
+  ## Filter the series to keep only complete cases
+    tb <- table(series[complete.cases(series)])
+    ## Calculate the probability distribution based on frequencies
+    prob <- tb / sum(tb)
+    ## Generate a sample based on the probability distribution
+    smpl <- sample(names(tb), prob=prob, size=length(sum(!complete.cases(series))))
+    ## Replace missing values in the original series with the sample
+    series[!complete.cases(series)] <- smpl
+    return (series)
+}
+```
+
+```{r}
+#data$smoke <- ordered(data$smoke, levels=c('Never', 'Occas', 'Regul', 'Heavy'))
+#data$smoke[!complete.cases(data)] <- names(which.max(table(data$smoke)))
+
+#data$exercise <- ordered(data$smoke, levels=c('None', 'Some', 'Freq'))
+#data$exercise[!complete.cases(data)] <- names(which.max(table(data$exercise)))
+
+data$smoke <- bootstrap(data$smoke)
+data$handedness <- bootstrap(data$handedness)
+data$sex <- bootstrap(data$sex)
+
+cat("Numberof non NA row:", dim(data[complete.cases(data),])[1])
+cat("\nNumberof non NA row:", dim(data[!complete.cases(data),])[1])
+
+summary(data)
+```
+
+
+
+

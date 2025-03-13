@@ -1,0 +1,327 @@
+---
+title: "Topic-4"
+author: "TA Kiran"
+date: "2023-10-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Set the Working Directory:
+setwd("/Users/kirankumarisheshma/Desktop/Introduction To data science/Topic-4")
+
+#Get Current Working Directory
+getwd()
+```
+
+**scatter plot **
+-Scatter plots are particularly useful for visualizing the relationship or correlation between two continuous variables
+
+-Use the plot() function to create a scatter plot.
+```{r}
+# Load the iris dataset
+data("iris")
+
+
+# Create the scatterplot and add labels
+plot(iris$Sepal.Length, iris$Sepal.Width, 
+     main = "Scatterplot Example", xlab = "Sepal.Length", ylab = "Sepal.Width", pch = 19, col="blue")
+```
+
+
+**Label Data Points in the Scatter plot**  
+
+-You can use the text() function to add labels or annotations to specific data points on the scatter plot.**
+```{r}
+# Create a scatter plot
+plot(iris$Sepal.Length, iris$Sepal.Width, main = "Sepal Length vs. Sepal Width", xlab = "Sepal Length", ylab = "Sepal Width", pch = 19, col = "blue")
+
+# Add labels for the first 100 data points
+text(iris$Sepal.Length[1:100], iris$Sepal.Width[1:100], labels = iris$Species[1:100], cex = 0.75, font = 2) #cex =character expansion
+ 
+```
+
+-You create a legend using the legend() function, specifying its position, labels, colors, point characters, and title.
+```{r}
+##### scatter plot
+plot(iris$Sepal.Length, iris$Sepal.Width, pch=19, main='Scatter plot',
+     xlab='Speal.Length', ylab = 'Sepal.Width', cex=0.75,
+     col=iris$Species)
+legend("topright", legend = unique(iris$Species),col=unique(iris$Species), pch = 19,)
+ 
+```
+
+**Points and Lines in the Scatter plot  **
+-In a scatter plot, you can control the appearance of points and lines to customize the visualization according to your needs. 
+```{r}
+s1 = which(iris$Species == "setosa") 
+plot(iris$Sepal.Length, iris$Sepal.Width, main = "Scatterplot Example", xlab = "Sepal.Length", ylab = "Sepal.Width", type = "n")
+points(iris$Sepal.Length[s1], iris$Sepal.Width[s1], pch = 2,col="red")
+
+```
+
+```{r}
+s1 = which(iris$Species == "setosa")
+s2 = which(iris$Species == "versicolor")
+
+# Create an empty scatter plot canvas
+plot(iris$Sepal.Length, iris$Sepal.Width, main = "Scatterplot Example", xlab = "Sepal.Length", ylab = "Sepal.Width", type = "n")
+
+# Plot data points for "setosa" with filled triangles (pch=2) and color red (col=2)
+points(iris$Sepal.Length[s1], iris$Sepal.Width[s1], pch = 2, col = "red")
+
+# Plot data points for "versicolor" with filled squares (pch=3) and color green (col=3)
+points(iris$Sepal.Length[s2], iris$Sepal.Width[s2], pch = 3, col = "blue")
+
+# Add dashed lines connecting two points
+lines(c(4.5, 6.5), c(2, 4.5), lty = 2)
+
+# Create a legend to explain the species and their colors
+legend(x = 7, y = 2.8, c("setosa", "versicolor"), col = c("red", "blue"), pch = c(2, 3), title = "Species")
+
+```
+
+**Histogram**
+
+-A histogram is a graphical representation of the distribution of a dataset. It is a type of data visualization that displays the frequency or count of data points within predefined intervals or bins
+
+-  "bins" and "breaks"  both refer to the intervals or divisions used to group data points in a visualization that displays the distribution of data.
+
+-breaks = 5 means you are dividing the data into 5 equally spaced bins. 
+
+```{r}
+##### histogram
+hist(iris$Petal.Length, main='Histogram of Petal.Length', xlab='Petal.Length', col='skyblue3',
+     breaks=5) # try breaks = 15 or a vector
+```
+
+**Bar plot**
+
+-Bar plots are typically used to visualize and represent categorical or discrete data
+
+```{r}
+##### bar plot
+barplot(table(iris$Species), main='Species',col=c("red","blue","green")) #table(iris$Species)It counts the number of occurrences of each unique species (setosa, versicolor, and virginica).
+legend("topright", legend = c("setosa", "versicolor", "virginica"),fill = c("red", "blue", "green"))
+
+```
+
+**Box plot**
+
+-Box plots are primarily used for visualizing and summarizing the distribution of numerical data, specifically continuous or interval data. 
+
+```{r}
+##### box plot
+boxplot(iris[,-5], main='Boxplot',col="red")
+boxplot(Petal.Length~Species, data=iris)
+```
+
+- from the above box plot we can see that the data are Skewed Data. there are outliers in the data set.
+
+**Density plot**
+
+```{r}
+# Load the ggplot2 library for creating density plots
+library(ggplot2)
+
+# Create a density plot for Sepal.Length
+ggplot(iris, aes(x = Sepal.Length, fill = Species)) +
+  geom_density(alpha = 0.5) +
+  labs(
+    title = "Density Plot of Sepal.Length by Species",
+    x = "Sepal Length",
+    y = "Density"
+  )
+
+```
+
+```{r}
+x <- rnorm(1000,0,1)
+kde <- density(x)
+hist(x, ylim=c(0,max(kde$y)), freq=F, col=rainbow(24))
+lines(kde, col='blue', lwd=5)
+```
+
+**QQ-Plot¶**
+
+- qqnorm() creates the QQ plot, and qqline() adds a reference line to the plot. If the points in the plot closely follow the reference line, it suggests that the data is approximately normally distributed.
+
+```{r}
+# Generate example data
+data <- rnorm(100)  # Generating normally distributed data
+
+# Create a QQ plot against the normal distribution
+qqnorm(data)
+qqline(data)
+```
+
+**##### pie chart**
+```{r}
+pie(table(iris$Species))
+```
+
+```{r}
+
+# Calculate the counts of each unique species
+species_counts <- table(iris$Species)
+
+# Define custom colors
+colors <- c("red", "blue", "green")
+
+# Create a pie chart with percentages and custom colors
+pie(species_counts, labels = paste(names(species_counts), "(", round(100 * species_counts / sum(species_counts), 1), "%)"), col = colors)
+
+# Set plot title
+title("Pie Chart of Species Distribution")
+
+# Add a legend
+legend("topright", legend = names(species_counts), fill = colors)
+
+```
+
+
+**Curve**
+
+```{r}
+##### curve
+curve(x**2+sin(x)+exp(x)*cos(x), 0,5)
+```
+
+**3D Density**
+```{r}
+grid_x <- seq(-10,10,length=100)
+grid_y <- grid_x
+height <- matrix(0, nrow=length(grid_x), ncol=length(grid_y))
+for(i in 1:length(grid_x)){
+  for(j in 1:length(grid_y)){
+    height[i,j] <- grid_x[i]**2 + grid_y[j]**2
+  }
+}
+persp(grid_x, grid_y, height)
+contour(grid_x, grid_y, height)
+image(grid_x, grid_y, height)
+```
+
+**Building ggplot2**
+
+```{r}
+# Load dplyr package explicitly for the pipe operator
+library(dplyr)
+
+# Now you can use %>% for data manipulation
+iris %>%
+  filter(Sepal.Length > 5) %>%
+  select(Sepal.Length, Sepal.Width)
+
+# Load ggplot2 separately if needed
+library(ggplot2)
+
+# Now you can use ggplot() for data visualization
+iris %>%
+  ggplot() +
+  geom_point(aes(x = Sepal.Length, y = Sepal.Width))
+
+```
+
+**1.Aesthetics : Specify the mapping manner**
+
+- aes(x, y, color, size, shape, alpha): where
+
+- x: x axis data
+
+- y: y axis data
+
+- color: color function
+
+- size: geometric attribute size
+
+- shape: geometric attribute shape
+
+- alpha: transparency
+
+```{r}
+iris %>% ggplot() + 
+  aes(x=Petal.Length, y=Petal.Width, color=Species)
+```
+
+**2.Geometries : Specify the geometric attribute**
+```{r}
+iris %>% ggplot() + 
+  aes(x=Petal.Length, y=Petal.Width, color=Species) + 
+  geom_point()
+```
+
+**Other commonly used function**
+
+- ggtitle():set title
+
+- xlab():set x axis title
+
+- ylab():set y axis title
+
+Or we can just simply use the following function
+
+- labs(x,y,title,fill)
+
+**geom_boxplot**
+
+```{r}
+ggplot(iris) + aes(x=Species, y=Petal.Length, fill=Species) + 
+  geom_boxplot() + labs(x='Species', y='PetalLength', 
+                        fill='Species~~',title=' Box plot')
+```
+
+**ggplot2 Geometries**
+
+*geom_bar*
+
+- geom_bar(position)
+- dodge: dodge bars
+- fill: fill bars
+- stack: stack bars
+
+```{r}
+ggplot(mpg) + aes(x=fl,fill=drv) + 
+  geom_bar(position='dodge') + # change to fill or stack
+  coord_flip() + theme_minimal() + 
+  scale_fill_brewer(palette="Blues")
+```
+
+**geom_point**
+
+```{r}
+ggplot(mtcars) + aes(x=disp, y=mpg, col=as.factor(gear),size=5) + 
+  geom_point(position='jitter') + theme_minimal() + 
+  scale_color_brewer()
+```
+
+**geom_line**
+```{r}
+library(gapminder)
+
+gapminder %>% filter(country %in% c('China', 'Taiwan')) %>% 
+ggplot() + aes(x = year, y = gdpPercap, colour = country) + 
+  geom_line() + theme_minimal()
+```
+
+**geom_boxplot**
+```{r}
+ggplot(gapminder, aes(x = continent, y = gdpPercap)) +
+  geom_boxplot()
+```
+
+**geom_histogram**
+-stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```{r}
+ggplot(iris) + aes(x=Petal.Length) + stat_bin(bins=30) + 
+  geom_histogram()
+```
+
+
+
+
+
+

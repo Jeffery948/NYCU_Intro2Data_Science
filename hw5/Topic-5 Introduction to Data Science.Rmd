@@ -1,0 +1,336 @@
+---
+title: "Topic-5"
+author: "TA Kiran"
+date: "2023-10-09"
+output: html_document
+---
+
+***EDA***
+
+```{r}
+# Set the Working Directory:
+setwd("D:/TA Introducing the data Science/2023 notes/Topic-5")
+
+#Get Current Working Directory
+getwd()
+```
+
+#Reading the dataset
+```{r}
+data=read.csv("bike_buyers.csv") 
+dim(data) 
+nrow(data) 
+ncol(data) 
+```
+
+```{r}
+head(data,10)
+tail(data,10)
+summary(data)
+```
+
+```{r}
+plot(data)
+```
+
+
+```{r}
+class(data)
+str(data)  # Structure of the data set
+```
+
+```{r}
+library(psych)
+describe(data) #describe() can computes the statistics of all numerical variables in data:
+```
+
+
+#Checking for NA Values
+```{r}
+colSums(is.na(data))
+```
+
+**Viewing trends in attributes with NA values using Histogram**
+
+```{r}
+par(mfrow = c(1, 4))
+
+hist(data$Income,breaks = "sturges",main = "Income")
+hist(data$Children, breaks = 20,main = "Children")
+hist(data$Cars,breaks = "scott",main = "Cars")
+hist(data$Age,breaks = "fd",main = "Age")
+```
+
+**Dealing with NA values**
+
+- Since, the distribution of Income and Age is left-skewed. We will impute median values
+
+*Median function*
+
+```{r}
+median(na.omit((data$Income)))
+median(na.omit((data$Age)))
+```
+
+- Data after cleaning the Missing values 
+```{r}
+data_clean <- data
+colSums(is.na(data_clean))
+```
+
+
+```{r}
+# Income replaced with Median
+data_clean$Income[is.na(data_clean$Income)] <- median(na.omit((data$Income)))
+
+# Age replaced with Median
+data_clean$Age[is.na(data_clean$Age)] <- median(na.omit((data$Age)))
+
+colSums(is.na(data_clean))
+```
+
+**Mode function**
+
+- Since mode is not an inbuilt function in R, we write a function which calculates the maximum frequency of unique values in every column.
+```{r}
+get_mode <- function(x) {                 
+  unique_x <- unique(x)
+  tabulate_x <- tabulate(match(x, unique_x))
+  unique_x[tabulate_x == max(tabulate_x)]
+}
+
+# Children replaced with Mode
+data_clean$Children[is.na(data_clean$Children)] <- get_mode(data$Children)
+colSums(is.na(data_clean))
+```
+
+```{r}
+# Cars replaced with Mean
+data_clean$Cars[is.na(data_clean$Cars)] <- mean(data$Cars, na.rm = TRUE)
+colSums(is.na(data_clean))
+```
+
+**Add density to histogram.**
+
+
+```{r}
+par(mfrow = c(1, 4))
+hist(data_clean$Income,breaks = "sturges",main = "Income", col="red")
+hist(data_clean$Children, breaks = 20,main = "Children",col="green")
+hist(data_clean$Cars,breaks = "scott",main = "Cars",col="blue")
+hist(data_clean$Age,breaks = "fd",main = "Age",col="black")
+```
+
+
+```{r}
+par(mfrow = c(1, 1))
+hist(data_clean$Income, col="blue",border="black",prob = TRUE,xlab = "Income",main = "Histogram of data_clean$Income ")
+lines(density(data_clean$Income),lwd = 2,col = "chocolate3")
+```
+
+**Density plot**
+
+-A density plot is a representation of the distribution of a numeric variable. It uses a kernel density estimate to show the probability density function of the variable (see more). It is a smoothed version of the histogram and is used in the same concept.
+
+```{r}
+par(mfrow = c(1, 2))
+plot(density(data_clean$Income), main='Income Density Spread',col="red")
+#Kernel density for age
+d <- density(data_clean$Income)
+plot(d, main="Kernel Density of age")
+polygon(d, border="blue", col="pink")
+```
+
+**Bar plot**
+```{r}
+par(mfrow = c(1, 1))
+# Create a contingency table of counts
+counts <- table(data_clean$Cars, data_clean$Gender)
+
+# Define a vector of colors for the bars (you can specify your own colors)
+bar_colors <- c("red", "blue", "green","black","pink")
+
+# Create the barplot with different colors
+barplot(counts, main = '',
+        xlab = "Number of cars",
+        legend = rownames(counts),
+        col = bar_colors)
+
+```
+
+
+**Exploring ggplot library**
+
+```{r}
+library(ggplot2)
+ggplot(data_clean,
+       aes(y = Age, x = Gender)) +
+  geom_point()
+```
+
+
+```{r}
+# Load the ggplot2 package if not already loaded
+library(ggplot2)
+
+# Create the scatterplot
+p3 <- ggplot(data_clean, aes(x = Age, y = Income, color = Age)) +
+  geom_point(alpha = 0.5, size = 1.5, position = position_jitter(width = 0.25, height = 0)) +
+  
+  # Customize the appearance
+  labs(x = "Age", y = "Income") +  # Add axis labels
+  scale_color_gradient(low = "blue", high = "red", name = "Age") +  # Customize color scale
+  
+  # Set theme options
+  theme(legend.position = "top", axis.text = element_text(size = 6))
+
+# Print the plot
+print(p3)
+
+```
+
+**Trend Plot**
+```{r}
+ggplot(data_clean, aes(x=data_clean$Age, y=data_clean$Education)) +
+    geom_point() +
+    geom_smooth(method=lm, level=0.99) + geom_line(aes(color = Age))
+```
+
+**Faceted Plot**
+```{r}
+# Create a faceted plot
+ggplot(data_clean, aes(x = Age, y = Education)) +
+  geom_point() +  # Add points to the plot 
+  labs(x = "Age", y = "Education") +  # Add axis labels
+  facet_wrap(~ Gender)  # Facet by the 'Gender' variable
+```
+
+**Box Plot**
+
+```{r}
+par(mfrow = c(1, 2))
+# Create a multi-panel layout
+par(mfrow = c(1, 2))  # 1 row and 2 columns for two plots side by side
+
+# Create the first box plot for "Income"
+boxplot(data_clean$Income, main = 'Boxplot of Income', col = 'red')
+
+# Create the second box plot for "Age"
+boxplot(data_clean$Age, main = 'Boxplot of Age', col = 'red')
+```
+
+**Correlation Plot**
+
+- Numerical variable
+```{r}
+library(corrplot)
+# Example: Calculate Spearman's rank correlation matrix for selected numeric variables
+numeric_vars <- data_clean[, c("Income", "Age")]  # Replace with your variable names
+cor(numeric_vars, method = "spearman")
+
+```
+
+```{r}
+# Create a histogram
+hist_plot <- ggplot(data_clean, aes(x = Income)) +
+  geom_histogram(binwidth = 0.5, fill = "blue", color = "black") +
+  labs(x = "Income", y = "Frequency", title = "Histogram with Normality Plot")
+
+# Create a normality plot (Q-Q plot)
+qq_plot <- ggplot(data_clean, aes(sample = Income)) +
+  stat_qq() +
+  stat_qq_line() +
+  labs(x = "Theoretical Quantiles", y = "Sample Quantiles", title = "Normality Plot")
+
+# Arrange the two plots side by side
+library(gridExtra)
+grid.arrange(hist_plot, qq_plot, ncol = 2)
+
+```
+
+
+#Reading the data
+
+```{r}
+census=read.csv("acs2015_county_data.csv") 
+head(census,5)
+dim(census) 
+nrow(census) 
+ncol(census) 
+```
+
+```{r}
+cor(census$TotalPop, census$Men)
+
+```
+
+```{r}
+cor(census[, 4:13])
+pairs(census[, 4:13])
+```
+
+```{r}
+# Load the corrplot library
+library(corrplot)
+
+par(mfrow = c(1, 1))
+# Create a correlation matrix (example data)
+# Replace this with your own correlation matrix or data frame
+cor_matrix <- cor(census[, 4:13])
+
+# Create the correlation plot
+corrplot(cor_matrix, method = "color", type = "upper", order = "hclust",
+         tl.col = "black", tl.srt = 45)
+
+```
+
+```{r}
+# Example correlation matrix (replace with your own data)
+cor_matrix <- cor(cor(census[, 4:13]))
+# Create the correlation plot with numeric values
+corrplot(cor_matrix, method = "number", type = "full", 
+         tl.col = "black", tl.srt = 45)
+
+
+```
+
+```{r}
+# Create a correlation plot with histograms and scatter plots
+pairs.panels(census[, 4:13], 
+             method = "pearson",  # Choose the correlation method (e.g., Pearson)
+             hist.col = "blue",  # Histogram color
+             density = TRUE,     # Add density plots to histograms
+             ellipses = TRUE,    # Add correlation ellipses to scatter plots
+             main = "Correlation Plot with Histograms and Scatter Plots"
+)
+
+```
+
+
+```{r}
+#install.packages("scatterplot3d")
+# Load the scatterplot3d library
+library(scatterplot3d)
+
+# Create a 3D scatter plot
+scatterplot3d(census[, 4], census[, 5], census[, 6], color = "blue", pch = 16,
+              xlab = "census$TotalPop", ylab = "census$Men", zlab = "census$Women")
+
+```
+
+**Data Normalization**
+
+- We will be using the caret package in ‘R’, a powerful package that uses the preProcess function for carrying out different types of data normalization steps.
+
+- The categorical variable will not be normalized.
+
+*Min-max Scaling*
+
+-In this approach, the data is scaled to a fixed range—usually 0 to 1. The impact is that we end up with smaller standard deviations, which can suppress the effect of outliers.
+
+-We follow the same steps as above, with the only change in the ‘method’ argument, where the normalization method is now set to “range”.
+
+
+
+ 
+ 
